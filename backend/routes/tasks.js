@@ -67,7 +67,7 @@ router.delete('/:id', auth, async (req, res) => {
   res.json({ message: 'Deleted' });
 });
 
-// attach document (simulate URL) -> anyone (owner)
+// attach document
 router.post('/:id/documents', auth, [
   body('url').isURL()
 ], async (req, res) => {

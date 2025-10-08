@@ -3,6 +3,13 @@ const User = require('../models/User');
 
 const jwtSecret = process.env.JWT_SECRET;
 
+/**
+ * 
+ * @param {*} req request payload
+ * @param {*} res response payload
+ * @param {*} next middleware
+ * @returns success user or 401
+ */
 async function auth(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(401).json({ message: 'Missing token' });
@@ -18,6 +25,11 @@ async function auth(req, res, next) {
   }
 }
 
+/**
+ * 
+ * @param {*} role user role
+ * @returns returns middleware success or 4XX code
+ */
 function requireRole(role) {
   return (req, res, next) => {
     if (!req.user) return res.status(401).send({ message: 'Not authenticated' });
