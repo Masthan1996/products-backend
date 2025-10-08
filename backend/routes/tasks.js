@@ -24,7 +24,14 @@ router.post('/', auth, [
 
 // list tasks for authenticated user
 router.get('/', auth, async (req, res) => {
-  const tasks = await Task.find({ owner: req.user._id }).sort('-createdAt');
+  const condition = {};
+  if(req.user.role !== 'admin') {
+    condition['owner']= req.user._id;
+  }
+  console.log('condition');
+  
+  const tasks = await Task.find(condition).sort('-createdAt');
+  
   res.json(tasks);
 });
 
