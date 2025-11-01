@@ -5,13 +5,13 @@ FROM node:18
 WORKDIR /backend
 
 # copy package files first
-COPY package*.json ./
+COPY backend/package*.json ./
 
 #Install dependencies
 RUN npm install
 
 #copy rest of the code
-COPY . .
+COPY backend/ .
 
 #Export port
 EXPOSE 3000
